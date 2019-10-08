@@ -24,12 +24,12 @@ function header() {
     temp.classList.add('temp')
 
 
-
+    headers.appendChild(header)
     header.appendChild(date);
     header.appendChild(head2);
     header.appendChild(temp)
 
-    return header;
+    return headers;
 
 }
 

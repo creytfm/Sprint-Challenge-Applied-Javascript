@@ -19,40 +19,34 @@
 // Create a card for each of the articles and add the card to the DOM.
 const card = document.querySelector('.cards-container');
 
-
-axios.get('https://lambda-times-backend.herokuapp.com/articles')
-    .then(response => {
-        console.log(response);
-        response.data.articles.forEach(item => {
-            card.appendChild(cardMaker(response.data))
-
+// Send an HTTP GET request to the following address: https://lambda-times-backend.herokuapp.com/articles
+axios.get ("https://lambda-times-backend.herokuapp.com/articles")
+.then ( response => {
+const{
+articles
+} = response.data;
+for(let key in articles) {
+    console.log("response", articles[key]);
+    articles[key].forEach(element => {
+        card.appendChild(createArticle(element))
         })
-        // deal with the response data in here
-    })
-    .catch(err => {
-        console.log()
-        // deal with the error in here
+    }
+})
+.catch(err => {
+ console.log("was not returned", err)
+});
 
-    })
 
-function cardMaker() {
-    const card = document.createElement('div');
-    const headline = document.createElement('div');
-    const author = document.createElement('div');
-    const picBox = document.createElement('div')
-    const pic = document.createElement('img');
-    const name = document.createElement('span');
 
-    card.classList.add('card');
-    headline.classList.add('headline');
-    author.classList.add('author');
-    picBox.classList.add('img-container');
-
-    card.textContent = `Card: ${data.articles}`
-    headline.textContent = `Headline: ${data.articles.headline}`
-    author.textContent = `Author: ${data.headers}`
-    pic.src = `Pic${data.url}`
-
+  
+function createArticle(obj) {
+    const
+    card = document.createElement('div'),
+    headline = document.createElement('div'),
+    author = document.createElement('div'),
+    picBox = document.createElement('div'),
+    pic = document.createElement('img'),
+    name = document.createElement('span')
 
     card.appendChild(headline);
     card.appendChild(author);
@@ -60,10 +54,62 @@ function cardMaker() {
     card.appendChild(picBox);
     card.appendChild(pic);
     card.appendChild(name);
+    card.appendChild(header)
+    
+
+    card.classList.add('card');
+    headline.classList.add('headline');
+    author.classList.add('author');
+    picBox.classList.add('img-container');
+
+    
+    headline.textContent = obj.headline
+    author.textContent = obj.author
+    imgSrc.src = obj.pic
+
+    response.data.articles.bootstrap.map(x  => card.appendChild(createArticle(x)))
+    response.data.articles.javascript.map(x  => card.appendChild(createArticle(x)))
+    response.data.articles.technology.map(x  => card.appendChild(createArticle(x)))
+    response.data.articles.jquery.map(x  => card.appendChild(createArticle(x)))
+    response.data.articles.node.map(x  => card.appendChild(createArticle(x)))
 
 
+   
 
 
-    return cardMaker
+    return card
 
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// console.log(response);
+        
+//             card.appendChild(cardMaker(response.articles))
+
+      
+//         // deal with the response data in here
+//     })
+//     .catch(err => {
+//         console.log("the data was not returned" , err)
+//     })
+//     })
+
+
+
+
+
